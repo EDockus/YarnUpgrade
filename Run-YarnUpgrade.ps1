@@ -1,5 +1,6 @@
 # Set the Azure DevOps organization URL, project name, and repository name
-$orgUrl = "https://dev.azure.com/Organization"
+$orgName = "orgname"
+$orgUrl = "https://dev.azure.com/$orgname"
 $projectName = "projectName"
 $repoName = "reponame"
 
@@ -15,7 +16,7 @@ $authHeader = @{Authorization = "Basic $([Convert]::ToBase64String([Text.Encodin
 $base64AuthInfo= [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(":$($pat)"))
 
 # Clone the repository
-git clone --depth 1 --branch $baseBranch "https://$([System.UriEscapeDataString($pat)]):@dev.azure.com/$projectName/$repoName.git"
+git clone --depth 1 --branch $baseBranch "https://$([System.UriEscapeDataString($pat)]):@dev.azure.com/$orgName/$projectName/_git/$repoName"
 
 # Change the working directory to the cloned repository
 Set-Location -Path ".\$repoName"
